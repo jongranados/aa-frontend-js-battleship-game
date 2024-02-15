@@ -29,7 +29,7 @@ window.onload = () => {
         const compBoardWrapper = document.getElementById('compBoard'); 
 
         // html grid 
-        const compBoardAvailableTiles =[]; // will be used to choose random comp move
+        const compBoardAvailableTiles =[]; // used to randomize computer move
         for (let row = 0; row < 9; row++) {
             for (let col = 0; col < 9; col++) { 
 
@@ -123,13 +123,13 @@ window.onload = () => {
         // reset button - the only reason this approach works is because the entire HTML body 
         // is deleted and recreated right before startGame() is reinvoked. If the elements with
         // listeners on them were hardcoded into the html file, reinvoking startGame would
-        // create additional listeners on top of old listerners. That's the issue I ran into
+        // create additional listeners on top of existing listerners. That's the issue I ran into
         // in the tic-tac-toe project. There's two solutions: (1) wipe out the HTML page and
-        // re-add every element at the JS level like I've done here anytime you want to reset 
+        // re-create every element via JS (as I've chosen to do here) anytime you want to reset 
         // the game (say after a player has won and you want a rematch) or (2) manually reset the
         // state content on the DOM elements you no longer wish to preserve BUT keeping the same 
         // elements and and therefore listeners and therefore not needing to reinvoke the outer
-        // function and creating additional scopes that layer new listeners. 
+        // function and creating additional scopes that layer new listeners. Option 1 is wiser.
         const killAll = document.createElement('div');
         killAll.setAttribute('id', 'killDiv');
         killAll.innerHTML = '<button type="button" id="killButton">RESET</button>';
