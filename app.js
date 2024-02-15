@@ -1,17 +1,21 @@
 const http = require("http");
 const { readFileSync } = require("fs");
 const path = require("path");
-// Create a server using `http`
+
+// create http server
 const server = http.createServer((req, res) => {
   console.log(`Incoming Request - Method: ${req.method} | URL: ${req.url}`);
-  // Process the body of the request
+
+  // process the body of the request
   let reqBody = "";
   req.on("data", (data) => {
     reqBody += data;
   });
-  // When the request is finished processing the entire body
+
+  // when the request is finished processing the entire body,
   req.on("end", () => {
-    // Parsing the body of the request
+
+    // parse the request body
     if (reqBody) {
       req.body = reqBody
         .split("&")
@@ -23,7 +27,8 @@ const server = http.createServer((req, res) => {
           return acc;
         }, {});
     }
-    // Home Page
+
+    // serve html homepage
     if (req.method === "GET" && req.url === "/") {
       const resBody = readFileSync("./index.html");
       res.statusCode = 200;
@@ -31,7 +36,8 @@ const server = http.createServer((req, res) => {
       res.end(resBody);
       return;
     }
-    // Serving Static Assets
+
+    // serve static assets
     const ext = path.extname(req.url);
     if (req.method === "GET" && ext) {
       try {
@@ -54,7 +60,8 @@ const server = http.createServer((req, res) => {
         );
       }
     }
-    // Page Not Found
+
+    // catch all - 404 error
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/plain");
     const resBody = "Page Not Found";
@@ -62,7 +69,9 @@ const server = http.createServer((req, res) => {
     res.end();
   });
 });
+
 // Set the port to 5000
-const port = 5000;
+const port = 5000;\
+
 // Tell the port to listen for requests on localhost:5000
 server.listen(port, () => console.log("Server is running on port", port));
