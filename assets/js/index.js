@@ -12,7 +12,7 @@ window.onload = () => {
         headerElement.setAttribute('id', 'logo');
         document.body.appendChild(headerElement);
 
-        headerElement.innerHTML = '<div id="leftShip">🚢</div>BATTLESHIP<div id="rightShip">🚢</div>'
+        headerElement.innerHTML = '<div id="leftShip">🚢</div>BYTESHIP<div id="rightShip">🚢</div>'
 
         // winner (hidden until a win is detected)
         const gameOverElement = document.createElement('div'); 
